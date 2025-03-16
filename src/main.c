@@ -9,19 +9,18 @@ int main(int argc, char *argv[]) {
   (void)argv;
 
   // should coalesce
-  void *p1 = alloc__malloc(2000);
-  void *p2 = alloc__malloc(1000);
-  void *p3 = alloc__malloc(1000);
+  void *p1 = malloc(2000);
+  void *p2 = malloc(1000);
+  void *p3 = malloc(1000);
   printf("allocated\n");
-  printf("p1: %p\np2: %p\np3: %p\n", p1, p2, p3);
   alloc__print();
-  alloc__free(p1);
+  free(p1);
   printf("freed p1\n");
   alloc__print();
-  alloc__free(p3);
+  free(p3);
   printf("freed p3\n");
   alloc__print();
-  alloc__free(p2);
+  free(p2);
   printf("freed p2\n");
   alloc__print();
 }
