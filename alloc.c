@@ -67,8 +67,34 @@ void alloc__free(void *addr) {
     exit(1);
   }
 
-  (void)addr;
-  return;
+  node_t *n = addr;
+
+  n->occupied = 0;
+
+  // coalesce
+  while (1) {
+    if (n->size >= MEM32K) {
+      break;
+    }
+    // get pointer to buddy
+    char *c = (char *)n;
+    size_t l = c - mem;
+    size_t b = l ^ n->size;
+    char *bp = mem + b;
+
+    // break if buddy is already allocated
+    if (((node_t *)bp)->occupied)
+      break;
+
+    if (c > bp) {
+      char *t = c;
+      c = bp;
+      bp = t;
+      n = (node_t *)c;
+    }
+
+    n->size <<= 1;
+  }
 }
 
 void alloc__print() {
