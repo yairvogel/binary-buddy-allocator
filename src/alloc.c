@@ -58,7 +58,7 @@ void *alloc__malloc(size_t size) {
 
   node->occupied = 1;
 
-  return node;
+  return ++node;
 }
 
 void alloc__free(void *addr) {
@@ -68,6 +68,8 @@ void alloc__free(void *addr) {
   }
 
   node_t *n = addr;
+  n--;
+  printf("node: %p\n", n);
 
   n->occupied = 0;
 
