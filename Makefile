@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 BUILD_DIR = build
 
 # Files
-SOURCES = main.c alloc.c
+SOURCES = src/main.c src/alloc.c
 EXECUTABLE = $(BUILD_DIR)/program
 
 # Default target
